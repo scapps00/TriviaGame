@@ -1,0 +1,29 @@
+body {
+	background-image: url("../images/background.jpg");
+	font-family: 'Diplomata SC', cursive;
+}
+
+h1 {
+	font-size: 60px;
+	text-align: center;
+}
+
+#time, .choices, #question {
+	font-family: 'Slabo 27px', serif;
+	text-align: center;
+	font-size: 40px;
+}
+
+.choices {
+	font-style: italic;
+}
+
+#start {
+	text-align: center;
+	font-size: 45px;
+}
+
+#musiccreds {
+	font-family: 'Slabo 27px', serif;
+	font-size: 10px;
+}
