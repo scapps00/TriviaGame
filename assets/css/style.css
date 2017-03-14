@@ -8,7 +8,7 @@ h1 {
 	text-align: center;
 }
 
-#time, .choices, #question {
+#time, .choices, #question, #result, #answer {
 	font-family: 'Slabo 27px', serif;
 	text-align: center;
 	font-size: 40px;
@@ -26,4 +26,52 @@ h1 {
 #musiccreds {
 	font-family: 'Slabo 27px', serif;
 	font-size: 10px;
+}
+
+@-webkit-keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+@keyframes hvr-pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  75% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+#answer {
+  -webkit-animation-name: hvr-pulse;
+  animation-name: hvr-pulse;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  text-align: center;
+}
+
+
+#book {
+	display: block;
+	margin: auto;
+	width: 300px;
+}
+
+/* fixes so that the text animation doesnt change the size of the screen */
+#control {
+	width: 700px;
+	display: block;
+	margin: auto;
 }
