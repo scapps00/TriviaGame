@@ -42,7 +42,47 @@ var question5 = {
 	wrongAns3: "Homage to Catalonia"
 };
 
-var questionArray = [question1, question2, question3, question4, question5];
+var question6 = {
+	line: "\"Someone must have slandered Josef K., for one morning, without having done anything truly wrong, he was arrested.\"",
+	rightAns: "The Trial",
+	wrongAns1: "The Metamorphosis",
+	wrongAns2: "The Stranger",
+	wrongAns3: "The Plague"
+};
+
+var question7 = {
+	line: "\"If you really want to hear about it, the first thing you'll probably want to know is where I was born, and what my lousy childhood was like, and how my parents were occupied and all before they had me, and all that David Copperfield kind of crap, but I don't feel like going into it, if you want to know the truth.\"",
+	rightAns: "Catcher in the Rye",
+	wrongAns1: "Franny an Zooey",
+	wrongAns2: "The Great Gatsby",
+	wrongAns3: "The Old Man and the Sea"
+}
+
+var question8 = {
+	line: "\"Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.\"",
+	rightAns: "Ulysses",
+	wrongAns1: "Dubliners",
+	wrongAns2: "A Portrait of the Artist as a Young Man",
+	wrongAns3: "Farewell to Arms"
+}
+
+var question9 = {
+	line: "\"One summer afternoon Mrs. Oedipa Maas came home from a Tupperware party whose hostess had put perhaps too much kirsch in the fondue to find that she, Oedipa, had been named executor, or she supposed executrix, of the estate of one Pierce Inverarity, a California real estate mogul who had once lost two million dollars in his spare time but still had assets numerous and tangled enough to make the job of sorting it all out more than honorary.\"",
+	rightAns: "The Crying of Lot 49",
+	wrongAns1: "Vineland",
+	wrongAns2: "Gravity's Rainbow",
+	wrongAns3: "Infinite Jest"
+}
+
+var question10 = {
+	line: "\"124 was spiteful.\"",
+	rightAns: "Beloved",
+	wrongAns1: "Sula",
+	wrongAns2: "The Color Purple",
+	wrongAns3: "Notes of a Native Son"
+}
+
+var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
 var questionNum = 0;
 
@@ -104,12 +144,11 @@ function choice(id, n){
 	}
 }
 
-function countdown() {
-	setTimeout(function() {
+function timeUp() {
 		document.getElementById("timenum").textContent--;
 		if (document.getElementById("timenum").textContent == 0) {
 			document.getElementById("result").textContent = "Time up!";
-			document.getElementById("answer").textContent = question1.rightAns;
+			document.getElementById("answer").textContent = questionArray[questionNum].rightAns;
 			document.getElementById(1).textContent = "";
 			document.getElementById(2).textContent = "";
 			document.getElementById(3).textContent = "";
@@ -121,7 +160,10 @@ function countdown() {
 		else {
 			countdown();
 		}
-		}, 1000);
+}
+
+function countdown() {
+	setTimeout(timeUp, 1000);
 }
 
 var questionNumArray = [];
@@ -129,8 +171,8 @@ var questionNumArray = [];
 var trigger = "";
 
 function chooseQuestion() {
-	questionNum = Math.floor(Math.random() * 5);
-	if (questionNumArray.length == 5) {
+	questionNum = Math.floor(Math.random() * 10);
+	if (questionNumArray.length == 10) {
 		document.getElementById("start").textContent = "All done! Here's how you did!";
 		document.getElementById("question").textContent = "";
 		document.getElementById(1).textContent = "Right: " + resultObject.right;
@@ -139,6 +181,7 @@ function chooseQuestion() {
 		document.getElementById(4).textContent = "Click here to try again";
 		document.getElementById(4).onclick = function() {
 			questionNumArray = [];
+			resultObject = {right: 0, wrong: 0, timeRanOut: 0};
 			newQuestion();
 			trigger = false;
 		}
