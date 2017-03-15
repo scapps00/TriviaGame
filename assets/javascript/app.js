@@ -181,9 +181,11 @@ function chooseQuestion() {
 		document.getElementById(4).textContent = "Click here to try again";
 		document.getElementById(4).onclick = function() {
 			questionNumArray = [];
-			resultObject = {right: 0, wrong: 0, timeRanOut: 0};
-			newQuestion();
+			resultObject.right = 0;
+			resultObject.wrong = 0
+			resultObject.timeRanOut = 0;
 			trigger = false;
+			newQuestion();
 		}
 		trigger = true;
 	}
