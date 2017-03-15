@@ -26,7 +26,23 @@ var question3 = {
 	wrongAns3: "The Master and Margarita"
 };
 
-var questionArray = [question1, question2, question3];
+var question4 = {
+	line:"\"Happy families are all alike; every unhappy family is unhappy in its own way.\"",
+	rightAns: "Anna Karenina",
+	wrongAns1: "Crime and Punishment",
+	wrongAns2: "War and Peace",
+	wrongAns3: "The Brothers Karamazov"
+};
+
+var question5 = {
+	line: "\"It was a bright cold day in April, and the clocks were striking thirteen.\"",
+	rightAns: "1984",
+	wrongAns1: "Brave New World",
+	wrongAns2: "Animal Farm",
+	wrongAns3: "Homage to Catalonia"
+};
+
+var questionArray = [question1, question2, question3, question4, question5];
 
 var questionNum = 0;
 
@@ -108,24 +124,54 @@ function countdown() {
 		}, 1000);
 }
 
+var questionNumArray = [];
+
+var trigger = "";
+
 function chooseQuestion() {
-	questionNum = Math.floor(Math.random() * 3);
+	questionNum = Math.floor(Math.random() * 5);
+	if (questionNumArray.length == 5) {
+		document.getElementById("start").textContent = "All done! Here's how you did!";
+		document.getElementById("question").textContent = "";
+		document.getElementById(1).textContent = "Right: " + resultObject.right;
+		document.getElementById(2).textContent = "Wrong: " + resultObject.wrong;
+		document.getElementById(3).textContent = "Didn't Answer: " + resultObject.timeRanOut;
+		document.getElementById(4).textContent = "Click here to try again";
+		document.getElementById(4).onclick = function() {
+			questionNumArray = [];
+			newQuestion();
+			trigger = false;
+		}
+		trigger = true;
+	}
+	else if (questionNumArray.indexOf(questionNum) == -1) {
+		questionNumArray.push(questionNum);
+		trigger = false;
+	}
+	else {
+		chooseQuestion();
+	}
 }
 
 function newQuestion() {
 	document.getElementById("result").textContent = "";
 	document.getElementById("answer").textContent = "";
-	document.getElementById("time").innerHTML = "Time Remaining: <span id=\"timenum\">25</span>";
-	countdown();
 	document.getElementById("start").textContent = "";
 	chooseQuestion();
-	document.getElementById("question").textContent = questionArray[questionNum].line;
-	randomArray = [];
-	randomizer(questionNum);		
-	document.getElementById(1).onclick = function() {choice(1, questionNum)};
-	document.getElementById(2).onclick = function() {choice(2, questionNum)};
-	document.getElementById(3).onclick = function() {choice(3, questionNum)};
-	document.getElementById(4).onclick = function() {choice(4, questionNum)};
+	if (trigger) {
+		return;
+	}
+	else {
+		document.getElementById("time").innerHTML = "Time Remaining: <span id=\"timenum\">25</span>";
+		document.getElementById("question").textContent = questionArray[questionNum].line;
+		randomArray = [];
+		randomizer(questionNum);		
+		document.getElementById(1).onclick = function() {choice(1, questionNum)};
+		document.getElementById(2).onclick = function() {choice(2, questionNum)};
+		document.getElementById(3).onclick = function() {choice(3, questionNum)};
+		document.getElementById(4).onclick = function() {choice(4, questionNum)};
+		countdown();
+	}
 }
 
 document.getElementById("start").onclick = function() {newQuestion()};
