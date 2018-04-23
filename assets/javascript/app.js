@@ -1,7 +1,10 @@
+//set up music
 document.getElementById("music").loop = true;2
 
+//set up initial state
 var resultObject = {right: 0, wrong: 0, timeRanOut: 0};
 
+//define questions and answers
 var question1 = {
 	line: "\"Mr. and Mrs. Dursley of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much.\"",
 	rightAns: "Harry Potter and the Sorcerer's Stone",
@@ -82,8 +85,10 @@ var question10 = {
 	wrongAns3: "Notes of a Native Son"
 }
 
+//put question arrays in a master array
 var questionArray = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 
+//set up randomizer for questions
 var questionNum = 0;
 
 var randomArray = [];
@@ -118,7 +123,7 @@ function randomizer(n) {
 	}
 }
 
-
+//what happens when an answer is chosen
 function choice(id, n){
 	if (document.getElementById(id).textContent == questionArray[n].rightAns) {
 		document.getElementById("result").textContent = "YOU GOT IT RIGHT!";
@@ -144,6 +149,7 @@ function choice(id, n){
 	}
 }
 
+//time is up function
 function timeUp() {
 		document.getElementById("timenum").textContent--;
 		if (document.getElementById("timenum").textContent == 0) {
@@ -162,17 +168,21 @@ function timeUp() {
 		}
 }
 
+//shows countdown in DOM
 function countdown() {
 	setTimeout(timeUp, 1000);
 }
 
+//questions already answered
 var questionNumArray = [];
 
+//this will be a trigger indicating that all questions have been answered
 var trigger = "";
 
+//picks next question
 function chooseQuestion() {
 	questionNum = Math.floor(Math.random() * 10);
-	if (questionNumArray.length == 10) {
+	if (questionNumArray.length == 10) { //if all questions have been answered
 		document.getElementById("start").textContent = "All done! Here's how you did!";
 		document.getElementById("question").textContent = "";
 		document.getElementById(1).textContent = "Right: " + resultObject.right;
@@ -189,21 +199,22 @@ function chooseQuestion() {
 		}
 		trigger = true;
 	}
-	else if (questionNumArray.indexOf(questionNum) == -1) {
+	else if (questionNumArray.indexOf(questionNum) == -1) { //if question hasn't been picked before
 		questionNumArray.push(questionNum);
 		trigger = false;
 	}
-	else {
+	else { //runs function again if random question pulled has already been displayed
 		chooseQuestion();
 	}
 }
 
+//runs chooseQuestion() to pick next question and displays it
 function newQuestion() {
 	document.getElementById("result").textContent = "";
 	document.getElementById("answer").textContent = "";
 	document.getElementById("start").textContent = "";
 	chooseQuestion();
-	if (trigger) {
+	if (trigger) { //if trigger=true, game is over and nothing else happens
 		return;
 	}
 	else {
@@ -219,4 +230,5 @@ function newQuestion() {
 	}
 }
 
+//starts game
 document.getElementById("start").onclick = function() {newQuestion()};
